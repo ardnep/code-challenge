@@ -1,8 +1,251 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+:root {
+  --font-family: 'Raleway', Arial, Helvetica, sans-serif;
+
+  --background-color: rgb(130, 169, 249);
+  --bg-gradient-color-1: rgba(130, 169, 249, 0.6012605725884104);
+  --bg-gradient-color-2: rgba(207, 195, 240, 0.6);
+  --bg-gradient-color-3: rgba(164, 252, 245, 0.6);
+  --background: var(--background-color);
+  --background: linear-gradient(247deg, var(--bg-gradient-color-1) 0%, var(--bg-gradient-color-2) 50%, var(--bg-gradient-color-3) 100%);
+
+  --foreground-color: rgba(0, 0, 0, 0.70);
+
+  --main-bg-color: #fdfdfd;
+
+  --input-border: 1px solid rgba(0, 0, 0, 0.10);
+  --input-bg-color: inherit;
+  --input-hover-border: 1px solid rgba(0, 0, 0, 0.25);
+  --input-focus-border: var(--input-hover-border);
+
+  --button-bg-color: rgba(91, 91, 252);
+  --button-hover-color: rgba(91, 91, 252, 0.7);
+
+  --loader-width: 120px;
+  --loader-height: var(--loader-width);
+  --loader-color: var(--background-color);
+  --loader-border-size: 5px;
+
+  --checkbox-width: 120px;
+  --checkbox-height: var(--checkbox-width);
+  --checkbox-color: rgba(33, 163, 85);
+
+  --checkmark-width: calc(var(--loader-width) / 2);
+  --checkmark-height: calc(var(--loader-height) / 4);
+  --checkmark-color: white;
+  --checkmark-border-size: 6px;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
 body {
+  min-height: 100%;
+  margin: 0;
+  font-family: var(--font-family);
+  color: var(--foreground-color);
+  background: var(--background);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  margin: auto;
+  border-radius: 25px;
+  background-color: var(--main-bg-color);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  padding: 40px;
+  box-sizing: border-box;
+  max-width: max-content;
+}
+
+main h1 {
+  margin-top: 0;
+}
+
+main.blur {
+  filter: blur(4px);
+}
+
+#loader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  border: var(--loader-border-size) solid rgba(0, 0, 0, 0.01);
+  border-top: var(--loader-border-size) solid var(--loader-color);
+  border-radius: 50%;
+  width: var(--loader-width);
+  height: var(--loader-height);
+  animation: spin 0.9s ease-in-out infinite;
+}
+
+#checkmark {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  opacity: 0;
+  width: var(--checkmark-width);
+  height: var(--checkmark-height);
+  border-left: var(--checkmark-border-size) solid var(--checkmark-color);
+  border-bottom: var(--checkmark-border-size) solid var(--checkmark-color);
+  transform-origin: 25% 25%;
+  transform: rotate(-45deg);
+  animation: checkmark 0.3s linear both;
+}
+
+#checkbox {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background-color: var(--checkbox-color);
+  width: var(--checkbox-width);
+  height: var(--checkbox-height);
+  border-radius: 50%;
+}
+
+.form-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+#loader.hidden,
+#checkmark.hidden,
+#checkbox.hidden,
+.form-tab.hidden,
+.form-buttons button.hidden {
+  display: none;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.otp-items {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.form-item label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.75);
+  margin-left: 0.2rem;
+}
+
+.form-item input {
+  border-radius: 8px;
+  border: var(--input-border);
+  background-color: var(--input-bg-color);
+  height: 2.8rem;
+  width: 25rem;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.otp-items input {
+  width: 5rem;
+  height: 5rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.form-item input:hover {
+  border: var(--input-hover-border);
+}
+
+.form-item input:focus {
+  outline: none;
+  border: var(--input-focus-border);
+}
+
+.form-item input::placeholder {
+  opacity: 0.4;
+}
+
+.form-item input.invalid {
+  border-color: red;
+}
+
+.form-buttons {
+  display: flex;
   justify-content: center;
-  min-width: 360px;
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.form button {
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  width: 40%;
+  height: 2.8rem;
+  background-color: var(--button-bg-color);
+  color: var(--main-bg-color);
+  border-radius: 5px;
+  transition: 0.2s;
+}
+
+.form button:hover {
+  background-color: var(--button-hover-color);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  50% {
+    opacity: 0.5;
+    width: var(--checkmark-width);
+    height: 0;
+  }
+
+  100% {
+    opacity: 1;
+    width: var(--checkmark-width);
+    height: var(--checkmark-height);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

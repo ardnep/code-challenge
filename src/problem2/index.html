@@ -9,21 +9,55 @@
 </head>
 
 <body>
-
   <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <label for="input-address">ETH Address</label>
-    <input id="input-address" />
-
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
-
-    <label for="input-otp">OTP Authentication</label>
-    <input type="number" id="input-otp" />
-
-    <button>SEND TOKENS</button>
-  </form>
-  <script src="script.js"></script>
+  <main id="main">
+    <h1>Transaction</h1>
+    <form class="form" action="">
+      <div class="form-tab">
+        <div class="form-item">
+          <label for="input-address">ETH Address</label>
+          <input id="input-address" oninput="this.classList.remove('invalid')"
+            placeholder="Eg: 0x72d082bf1e41791C2Aa25d1559ba6fFE4F07AE5A" autocomplete="off" autofocus required>
+        </div>
+        <div class="form-item">
+          <label for="input-amount">Amount to send</label>
+          <input type="text" oninput="this.classList.remove('invalid')" id="input-amount" placeholder="0.00"
+            autocomplete="off" required>;
+        </div>
+        <div class="form-buttons">
+          <button type="button" id="confirmBtn">CONFIRM</button>
+        </div>
+      </div>
+      <div class="form-tab hidden">
+        <div class="form-item">
+          <label for="input-otp">OTP Authentication</label>
+          <div class="otp-items">
+            <input class="otp-input" oninput="this.classList.remove('invalid')" autocomplete="off" pattern="[0-9]{1}"
+              maxlength="1" inputmode="numeric" type="text" id="input-otp-1" />
+            <input class="otp-input" oninput="this.classList.remove('invalid')" autocomplete="off" pattern="[0-9]{1}"
+              maxlength="1" inputmode="numeric" type="text" id="input-otp-2" />
+            <input class="otp-input" oninput="this.classList.remove('invalid')" autocomplete="off" pattern="[0-9]{1}"
+              maxlength="1" inputmode="numeric" type="text" id="input-otp-3" />
+            <input class="otp-input" oninput="this.classList.remove('invalid')" autocomplete="off" pattern="[0-9]{1}"
+              maxlength="1" inputmode="numeric" type="text" id="input-otp-4" />
+            <input class="otp-input" oninput="this.classList.remove('invalid')" autocomplete="off" pattern="[0-9]{1}"
+              maxlength="1" inputmode="numeric" type="text" id="input-otp-5" />
+            <input class="otp-input" oninput="this.classList.remove('invalid')" autocomplete="off" pattern="[0-9]{1}"
+              maxlength="1" inputmode="numeric" type="text" id="input-otp-6" />
+          </div>
+        </div>
+        <div class="form-buttons">
+          <button type="button" id="sendTokensBtn">SEND TOKENS</button>
+        </div>
+      </div>
+    </form>
+  </main>
+  <div id="loader" class="hidden"></div>
+  <div id="checkbox" class="hidden">
+    <div id="checkmark" class="hidden"></div>
+  </div>
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+  <script type="module" src="script.js"></script>;
 </body>
 
 </html>
